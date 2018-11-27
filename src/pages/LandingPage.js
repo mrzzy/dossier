@@ -4,9 +4,11 @@
 */
 
 import React from 'react';
+import {ResponsiveSwitch, ResponsiveCase} from '../components/ResponsiveSwitch.js';
 
 import "../styles/LandingPage.css";
-import HeroImage from "../assets/landing_laptop_clipped.jpg";
+import HeroImageClipped from "../assets/landing_laptop_clipped@2x.jpg";
+import HeroImage from "../assets/landing_laptop.jpg";
 
 /* Landing Page component displays the landing page */
 function LandingPage() {
@@ -18,9 +20,17 @@ function LandingPage() {
                     <span class="footnote">est. 2014</span>
                 </div>
             </div>
-            <img class="hero" src={HeroImage} alt="software development"/>
+            <ResponsiveSwitch>
+                <ResponsiveCase minWidth={800} component={
+                    <img class="hero" src={HeroImageClipped} alt="software development"/>}
+                />
+                <ResponsiveCase minWidth={0} component={
+                    <img class="hero" src={HeroImage} alt="software development"/>}
+                />
+            </ResponsiveSwitch>
         </section>
     );
+
 }
 
 export default LandingPage;

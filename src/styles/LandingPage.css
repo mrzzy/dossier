@@ -11,13 +11,10 @@
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-
-    min-height: 100vh;
 }
 
 #landing.page .tagline {
     margin-left: 6vw;
-    margin-right: 6vw;
 
     text-align: center;
     color: #845371;
@@ -33,7 +30,7 @@
 #landing.page .tagline h1 {
     color: #E58282;
     margin: 0;
-    margin-top: 0.8em;
+    margin-top: 0.6em;
     margin-bottom: 0.6em;
 }
 
@@ -44,14 +41,19 @@
 
 
 #landing.page img {
+    flex-grow: 2;
     object-fit: contain;
+    
+    max-width: 100vh;
 }
 
 /* Responsive Layout: Mobile */
-@media screen and (max-width: 600pt) {
+@media screen and (max-width: 800px) {
     #landing.page {
         display: block;
         text-align: center;
+    
+        padding-top: 6vh;
     }
     
     #landing.page img {
