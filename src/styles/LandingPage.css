@@ -1,0 +1,61 @@
+/*
+ * styles//LandingPage.css
+ * Dossier
+ * Landing Page Styling
+*/
+
+#landing.page {
+    background-color: #000000;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+}
+
+#landing.page .tagline {
+    margin-left: 6vw;
+    margin-right: 6vw;
+
+    text-align: center;
+    color: #845371;
+    flex-grow: 1;
+}
+
+#landing.page .tagline .container {
+    max-width: 16em;
+    display: inline-block;
+    text-align: left;
+}
+
+#landing.page .tagline h1 {
+    color: #E58282;
+    margin: 0;
+    margin-top: 0.8em;
+    margin-bottom: 0.6em;
+}
+
+#landing.page .tagline .footnote {
+    display: block;
+    text-align: left;
+}
+
+
+#landing.page img {
+    object-fit: contain;
+}
+
+/* Responsive Layout: Mobile */
+@media screen and (max-width: 600pt) {
+    #landing.page {
+        display: block;
+        text-align: center;
+    }
+    
+    #landing.page img {
+        margin-top: 2vh;
+        max-width: 80vw;
+    }
+}
