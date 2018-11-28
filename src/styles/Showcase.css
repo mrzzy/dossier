@@ -1,0 +1,44 @@
+/*
+ * styles/Showcase.css
+ * Showcase Component styling
+*/
+
+.showcase {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.showcase .container {
+    text-align: center;
+}
+
+.showcase .caption {
+    display: inline-block;
+    text-align: left;
+    flex-grow: 1;
+    max-width: 32em;
+    padding-left: 6em;
+    padding-right: 6em;
+    padding-bottom: 2em;
+}
+
+
+.showcase img {
+    object-fit: cover;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+/* Responsive Layout: Mobile */
+@media screen and (max-width: 800px) {
+    .showcase {
+        display: block;
+    }
+
+    .showcase .caption {
+        max-width: 80vw;
+    }
+}
