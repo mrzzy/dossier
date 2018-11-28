@@ -23,7 +23,8 @@ class ResponsiveSwitch extends React.Component {
         super(props);
 
         this.state = {
-            currentWidth: 0
+            currentWidth: 0,
+            bound: false
         }
 
         // Bind callbacks
@@ -56,7 +57,6 @@ class ResponsiveSwitch extends React.Component {
 
     // Event handlers
     onViewportChange() {
-        console.log("rendering....");
         // Trigger rerender on viewport width change
         if(window.innerWidth !== this.state.currentWidth) {
             this.setState({currentWidth: window.innerWidth});
@@ -65,9 +65,14 @@ class ResponsiveSwitch extends React.Component {
 
     componentDidMount() {
         // Start listening for viewport changes with handler
-        window.onresize = this.onViewportChange;
+        window.addEventListener("resize", this.onViewportChange);
 
         this.onViewportChange();
+    }
+
+    componentWillUnmount() {
+        // Stop listening for viewport changes with handler
+        window.removeEventListener("resize", this.onViewportChange);
     }
 }
 
