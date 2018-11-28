@@ -1,0 +1,18 @@
+/*
+ * styles/WorkPage.css
+ * Work Page Styling
+*/
+
+#work.page {
+    background-color: #000000;
+}
+
+#work.page .showcase .caption h1 {
+    margin-bottom: 0.6em;
+    color: #E58282;
+}
+
+#work.page .showcase .caption .description {
+    color: #E3A899;
+    line-height: 1.8em;
+}

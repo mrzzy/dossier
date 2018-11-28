@@ -7,6 +7,7 @@ import React from 'react';
 import Showcase from "../components/Showcase";
 import {ResponsiveSwitch, ResponsiveCase} from '../components/ResponsiveSwitch.js';
 
+import "../styles/WorkPage.css";
 import CardioImage from "../assets/work_cardio@2x.jpg";
 import TrumpImage from "../assets/work_trump@2x.jpg";
 import MobileCardioImage from "../assets/mobile_work_cardio@2x.jpg";
