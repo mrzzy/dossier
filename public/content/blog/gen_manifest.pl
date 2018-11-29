@@ -38,18 +38,21 @@ for my $path (@post_paths) {
     # Extract post title
     my $title = $contents[0];
     chomp $title;
-    $title =~ s/\W*([-\w?,.! ]+)\W*/$1/g;
+    $title =~ s/\W*([-\w?,.!: ]+)\W*/$1/g;
     # Extract post subtitle
     my $subtitle = $contents[1];
     chomp $subtitle;
-    $subtitle =~ s/\W*([-\w?,.! ]+)\W*/$1/g;
+    $subtitle =~ s/\W*([-\w?,.!: ]+)\W*/$1/g;
+    # Extract post ref from pathf
+    my $ref = $path;
+    $ref =~ s/\W*(\w+).*/$1/g;
 
     # Add metadata to manifest
     my %metadata = (
         "timestamp" => $timestamp,
         "title" => $title,
         "subtitle" => $subtitle,
-        "path" => "/content/blog/" . $path
+        "href" => "/blog/" . $ref
     );
     
     push @manifest, \%metadata;
