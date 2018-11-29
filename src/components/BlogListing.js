@@ -8,17 +8,24 @@ import React from 'react';
 import "../styles/BlogListing.css";
 
 /* Blog entry component represents a entry in a Blog List.
- * The title is given by a title prop, the summary given by the summary prop.
+ * Metadata about the entry is given by the meta prop a JS object which 
+ * gives the title, subtitle, timestamp and href of the blog entry
 */
 function BlogEntry(props) {
+    const meta = props.meta;
+    
+    /* Format timestamp to date representation of timestamp */
+    const timestampDate = new Date(meta.timestamp);
+    const timestampStr = timestampDate.toLocaleDateString();
+
     return (
-        <div className="blog-entry">
-            <h2 className="title">{props.title}</h2>
-            <span className="summary">{props.summary}</span>
-        </div>
+        <a href={meta.href} className="blog-entry">
+            <h3 className="title">{meta.title}</h3>
+            <span className="timestamp">{timestampStr}</span>
+            <span className="subtitle">{meta.subtitle}</span>
+        </a>
     );
 }
-
 
 /* Blog List component display a listing of blog posts based on the 
  * blog /content/blog/manifest.json
@@ -64,8 +71,15 @@ class BlogList extends React.Component {
         } else {
             // Contents has loaded, render blog posts from manifest
             console.log("render with manifest...");
-        
-            return null;
+            const blogEntries = this.state.manifest.map((metadata) => {
+                return <BlogEntry meta={metadata} />
+            });
+
+            return (
+                <div className="blog-list">
+                    {blogEntries}
+                </div>
+            );
         }
                 
     }
