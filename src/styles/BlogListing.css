@@ -3,15 +3,6 @@
  * Blog Listing Components Styling
 */
 
-.blog-list {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    
-    min-height: 64vh;
-}
-
-
 /* Loading Display */
 .blog-list .container {
     position: relative;
@@ -26,6 +17,13 @@
 }
 
 /* Blog Listing */
+.blog-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
 
 /* Blog Entries */
 .blog-entry {
@@ -46,11 +44,11 @@
 }
 
 .blog-entry .content  {
-    position: absolute;
+    position: relative;
     height: 80%;
     width: 80%;
-    padding-top: 1.6em;
-    padding-left: 2em;
+    left: 2em;
+    top: 1.6em;
     overflow: hidden;
 }
 
@@ -77,7 +75,6 @@
 .blog-entry .subtitle {
     display: block;
     color: #434343;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }

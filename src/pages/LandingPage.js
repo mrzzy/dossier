@@ -13,19 +13,19 @@ import HeroImage from "../assets/landing_laptop.jpg";
 /* Landing Page component displays the landing page */
 function LandingPage() {
     return (
-        <section id="landing" Class="page container">
-            <div Class="tagline">
-                <div Class="container">
-                    <h2 Class="fancy"> making and breaking.  </h2>
-                    <span Class="footnote">est. 2014</span>
+        <section id="landing" className="page container">
+            <div className="tagline">
+                <div className="container">
+                    <h2 className="fancy"> making and breaking.  </h2>
+                    <span className="footnote">est. 2014</span>
                 </div>
             </div>
             <ResponsiveSwitch>
                 <ResponsiveCase minWidth={800} component={
-                    <img Class="hero" src={HeroImageClipped} alt="software development"/>}
+                    <img className="hero" src={HeroImageClipped} alt="software development"/>}
                 />
                 <ResponsiveCase minWidth={0} component={
-                    <img Class="hero" src={HeroImage} alt="software development"/>}
+                    <img className="hero" src={HeroImage} alt="software development"/>}
                 />
             </ResponsiveSwitch>
         </section>
