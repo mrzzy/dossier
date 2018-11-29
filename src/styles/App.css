@@ -9,7 +9,7 @@
 
 body {
     font-family: 'Alegreya', serif;
-
+    font-size: 1.6rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -21,5 +21,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 4.2em;
+    font-size: 7.2rem;
+}
+
+h2 {
+    font-size: 5.2rem;
+}
+
+@media screen and (max-width: 600pt) {
+    body {
+        font-size: 1rem;
+    }
+
+    h1 {
+        font-size: 3.2rem;
+    }
 }
