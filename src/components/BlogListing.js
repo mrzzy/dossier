@@ -6,6 +6,7 @@
 import React from 'react';
 
 import "../styles/BlogListing.css";
+import BlogEntryBackground from "../assets/blog_entry@2x.png";
 
 /* Blog entry component represents a entry in a Blog List.
  * Metadata about the entry is given by the meta prop a JS object which 
@@ -20,9 +21,12 @@ function BlogEntry(props) {
 
     return (
         <a href={meta.href} className="blog-entry">
-            <h3 className="title">{meta.title}</h3>
-            <span className="timestamp">{timestampStr}</span>
-            <span className="subtitle">{meta.subtitle}</span>
+            <img className="background" src={BlogEntryBackground}a/>
+            <div className="content">
+                <h3 className="title">{meta.title}</h3>
+                <span className="timestamp fancy">{timestampStr}</span>
+                <span className="subtitle">{meta.subtitle}</span>
+            </div>
         </a>
     );
 }
