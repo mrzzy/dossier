@@ -48,7 +48,8 @@ for my $path (@post_paths) {
     my %metadata = (
         "timestamp" => $timestamp,
         "title" => $title,
-        "subtitle" => $subtitle
+        "subtitle" => $subtitle,
+        "path" => "/content/blog/" . $path
     );
     
     push @manifest, \%metadata;
