@@ -37,10 +37,12 @@ for my $path (@post_paths) {
     my @contents = <$post>;
     # Extract post title
     my $title = $contents[0];
-    $title =~ s/[^a-zA-Z0-9,!?. ]//g;
+    chomp $title;
+    $title =~ s/\W*([-\w?,.! ]+)\W*/$1/g;
     # Extract post subtitle
     my $subtitle = $contents[1];
-    $subtitle =~ s/[^a-zA-Z0-9,!?. ]//g;
+    chomp $subtitle;
+    $subtitle =~ s/\W*([-\w?,.! ]+)\W*/$1/g;
 
     # Add metadata to manifest
     my %metadata = (
