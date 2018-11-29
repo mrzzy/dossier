@@ -5,6 +5,8 @@
 
 import React from 'react';
 
+import "../styles/BlogListing.css";
+
 /* Blog entry component represents a entry in a Blog List.
  * The title is given by a title prop, the summary given by the summary prop.
 */
@@ -54,7 +56,9 @@ class BlogList extends React.Component {
             console.log("render without manifest...");
             return (
                 <div className="blog-list">
-                    <span className="loading">Loading&hellip;</span>
+                    <div className="container">
+                        <span className="loading fancy">Loading&hellip;</span>
+                    </div>
                 </div>
             );
         } else {

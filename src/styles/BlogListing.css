@@ -1,0 +1,26 @@
+/*
+ * components/BlogListing.js
+ * Blog Listing Components Styling
+*/
+
+.blog-list {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    
+    min-height: 64vh;
+}
+
+.blog-list .container {
+    position: relative;
+}
+
+.blog-list .loading {
+    position: relative;
+    top: 42%;
+    
+    color: #8D9589;
+    font-size: 3.6rem;
+}
+
+
