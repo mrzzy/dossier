@@ -1,7 +1,8 @@
 #
 # gen_manifest.pl
 # Dossier
-# Generate manifest
+# Generate Blog manifest
+# Manifest is used by the site to discover and display available blogs
 #
 
 use warnings;
@@ -10,9 +11,13 @@ use 5.010;
 use POSIX qw(strftime);
 
 use JSON::PP;
+
+my $TITLE_REGEX = qr/([-\w?,.\/!:() ]+)/;
  
+## Utility Functionality
 # Convert the given date to iso forma
-sub convert_iso_date {
+sub convert_iso_date 
+{
 	my ($local_date) = @_;
 	           
     # add a colon between the hour and minute part of the timezone
@@ -23,11 +28,39 @@ sub convert_iso_date {
     return strftime("%Y-%m-%dT%H:%M:%S", localtime($local_date)) . $tz;
 }
 
-# Build manifest
-my @manifest = ();
-# Define posts as all markdown files
-my @post_paths = <*.md>;
-for my $path (@post_paths) {
+## Metadata Extraction
+# Extract a table of contents array from the given markdown contents
+# Returns a refreence to the extracted table of contents
+sub extract_contents_table 
+{
+    my ($contents) = @_;
+    
+    # Extract table of contents by extracting first and second level headers
+    my @contents_table = ();
+    for my $line(@{$contents}) 
+    {
+        # Check for first and second level headers
+        if($line =~ /^#{1,2}[^#]+$/)
+        {
+            my $header = $line;
+            # Clean headers of extranous characters
+            chomp $header;
+            $header =~ s/^#{1,2}\W*${TITLE_REGEX}\W*$/$1/;
+        
+            # Add cleaned header to table of contents
+            push @contents_table, $header;
+        }
+    }
+    
+    return \@contents_table;
+}
+
+# Extract metadata for the post at the given path
+# Returns the extracted metadata as a referene to hash
+sub extract_metadata 
+{
+    my ($path) = @_;
+
     # Determine post timestamp
     my $mod_time = (stat($path))[9];
     my $timestamp =  &convert_iso_date($mod_time);
@@ -35,27 +68,44 @@ for my $path (@post_paths) {
     # Read post content
     open(my $post, '<', $path);
     my @contents = <$post>;
+
     # Extract post title
     my $title = $contents[0];
     chomp $title;
-    $title =~ s/\W*([-\w?,.!: ]+)\W*/$1/g;
+    $title =~ s/\W*${TITLE_REGEX}\W*/$1/g;
+    
     # Extract post subtitle
     my $subtitle = $contents[1];
     chomp $subtitle;
-    $subtitle =~ s/\W*([-\w?,.!: ]+)\W*/$1/g;
-    # Extract post ref from pathf
-    my $ref = $path;
-    $ref =~ s/\W*(\w+).*/$1/g;
+    $subtitle =~ s/\W*${TITLE_REGEX}\W*/$1/g;
+    
+    # Extract post table of contnts
+    my $contents_table = &extract_contents_table(\@contents);
 
-    # Add metadata to manifest
-    my %metadata = (
+    # Extract post identifier from path
+    my $id = $path;
+    $id =~ s/\W*(\w+).*/$1/g;
+    
+    # Build metadata, to manifest
+    my $metadata = {
+        "id" => $id,
         "timestamp" => $timestamp,
         "title" => $title,
         "subtitle" => $subtitle,
-        "href" => "/blog/" . $ref
-    );
-    
-    push @manifest, \%metadata;
+        "contents_table" => $contents_table
+    };
+        
+    return $metadata;
+}
+
+
+# Build manifest
+my @manifest = ();
+# Define posts as all markdown files
+my @post_paths = <*.md>;
+for my $path (@post_paths) {
+    my $metadata = &extract_metadata($path);
+    push @manifest, $metadata;
 }
 
 # Output manifest to file 
