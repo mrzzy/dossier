@@ -13,7 +13,7 @@ use POSIX qw(strftime);
 
 use JSON::PP;
 
-my $BLOG_PATH = '/content/blog';
+my $BLOG_PATH = '/content/blog/entry';
 my $TITLE_REGEX = qr/([-\w?,.\/!:() ]+)/;
  
 ## Utility Functionality
@@ -88,9 +88,10 @@ sub extract_metadata
     my $id = $path;
     $id =~ s/\W*(\w+).*/$1/g;
     
-    # Extract href path from path
+    # Build reference to href for post. 
+    # href references the preprocessed version
     my $href = $path;
-    $href =~ s/(.*)\.md$/${BLOG_PATH}\/$1\.pd/;
+    $href =~ s/(\w+)\.md$/${BLOG_PATH}\/$1\.md/;
     
     # Build metadata, to manifest
     my $metadata = {
