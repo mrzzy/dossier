@@ -8,7 +8,7 @@ use warnings;
 use strict;
 use 5.010;
 
-my $BLOG_PATH = '/content/blog/entry';
+my $BLOG_PATH = '/content/blog';
 
 # Fix the attachment links in the markdown given markdown contents, so that the 
 # markdown has its attachments (images) properly
@@ -19,7 +19,8 @@ sub fix_attachment_links
     
     my @fixed_contents = ();
     for my $line(@{$contents}) {
-        $line =~ s/(attachments\/[\/\w.-]+)/$BLOG_PATH\/$1/;
+        # Hardcoded regex targets boost notes markdown export format
+        $line =~ s/attachments\/[\w-]*\/(\w+.\w+)/$BLOG_PATH\/attachments\/$1/;
         push @fixed_contents, $line;
     }
     
