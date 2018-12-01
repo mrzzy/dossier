@@ -5,7 +5,7 @@
 */
 
 /* Typography */
-@import url('https://fonts.googleapis.com/css?family=Alegreya:400,700|Poiret+One');
+@import url('https://fonts.googleapis.com/css?family=Alegreya:400,700|Lato:400,700|Poiret+One');
 
 body {
     font-family: 'Alegreya', serif;
@@ -30,6 +30,10 @@ h2 {
 
 h3 {
     font-size: 2.8em;
+}
+
+h4 {
+    font-size: 2.2em;
 }
 
 @media screen and (max-width: 600pt) {

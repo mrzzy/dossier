@@ -21,7 +21,7 @@ function BlogEntry(props) {
 
     return (
         <a href={meta.href} className="blog-entry">
-            <img className="background" src={BlogEntryBackground}a/>
+            <img className="background" alt="background" src={BlogEntryBackground}a/>
             <div className="content">
                 <h3 className="title">{meta.title}</h3>
                 <span className="timestamp fancy">{timestampStr}</span>
@@ -64,7 +64,6 @@ class BlogList extends React.Component {
     render() {
         if(this.state.manifest === null) {
             // Contents not loaded, render loading display
-            console.log("render without manifest...");
             return (
                 <div className="blog-list">
                     <div className="container">
@@ -74,7 +73,6 @@ class BlogList extends React.Component {
             );
         } else {
             // Contents has loaded, render blog posts from manifest
-            console.log("render with manifest...");
             const blogEntries = this.state.manifest.map((metadata) => {
                 return <BlogEntry meta={metadata} />
             });

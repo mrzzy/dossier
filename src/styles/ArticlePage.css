@@ -1,0 +1,136 @@
+/*
+ * styles/ArticlePage.css
+ * Article Page styling
+*/
+
+#article.page {
+    position: relative;
+    min-height: 100vh;
+    text-align: center;
+
+    background-color: #F4F4F4;
+}
+
+/* Loading screen */
+#article.page .container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    color: #CDD4DD;
+}
+
+
+/* Article Sidebar */
+#article.page .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #F4F4F4;
+    text-align: left;
+
+    padding: 1.8vmax;
+
+    width: 20vw;
+    height: 100vh;
+}
+
+#article.page .sidebar h4 {
+    color: #959595;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    letter-spacing: -0.02em;
+    
+}
+
+#article.page .sidebar .contents-table {
+    list-style-type: none;
+    padding: 0;
+}
+
+#article.page .sidebar .contents-table .listing {
+    margin-bottom: 1.6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
+
+    font-size: 1.2rem;
+    font-family: "Lato", sans-serif;
+    color: #B5B5B5;
+}
+
+#article.page .sidebar .contents-table .listing.reading {
+}
+
+@media only screen and (max-width: 800px) {
+    #article.page .sidebar {
+        display:none;
+    }
+}
+
+/* Article Content */
+#article.page .content-wrapper {
+    display: inline-block;
+    width: 52vw;
+    text-align: center;
+    background-color: #FFFFFF;
+
+    box-shadow: 0px 0px 8px -4px rgba(0,0,0,0.36);
+}
+
+#article.page .content {
+    position: relative;
+    display: inline-block;
+    width: 42vw;
+
+    color: #000000;
+    text-align: left;
+    overflow: hidden;
+    font-size: 1.5rem;
+}
+
+#article.page .content h1 {
+    font-size: 2.8em;
+    margin-top: 1.4em;
+    margin-bottom: 0.6em;
+}
+
+#article.page .content h2 {
+    font-size: 2.0em;
+    margin-top: 1.2em;
+    margin-bottom: 0.3em;
+}
+
+#article.page .content h3 {
+    font-size: 1.5em;
+    margin-top: 1em;
+    margin-bottom: -0.3em;
+}
+
+#article.page .content h4 {
+    font-size: 1.2em;
+    margin-top: 0.8em;
+    margin-bottom: -0.6em;
+}
+
+#article.page .content h5 {
+    font-size: 1em;
+}
+
+#article.page .content img {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    object-fit: contain;
+    max-width: 96%;
+    margin-top: 2.4em;
+    margin-bottom: 2.4em;
+}
+
+/* Article Code */
+#article.page .content pre {
+    overflow: scroll;
+}
