@@ -14,7 +14,7 @@ use POSIX qw(strftime);
 use JSON::PP;
 
 my $BLOG_PATH = '/content/blog';
-my $TITLE_REGEX = qr/([-\w?,.\/!:() ]+)/;
+my $FILTER_REGEX = qr/[_#`*{}]/;
  
 ## Utility Functionality
 # Convert the given date to iso forma
@@ -30,31 +30,60 @@ sub convert_iso_date
     return strftime("%Y-%m-%dT%H:%M:%S", localtime($local_date)) . $tz;
 }
 
+# Extracts plain text by filter markdown special characters and removing
+# leading and trailing whitespace
+# Returns the extracted plaintext
+sub filter_text
+{
+    my ($feed) = @_;
+    chomp $feed;
+    $feed =~ s/${FILTER_REGEX}//g;
+    $feed =~ s/^\s*(.*)\s*$/$1/g;
+
+    return $feed;
+}
+
 ## Metadata Extraction
-# Extract a table of contents array from the given markdown contents
-# Returns a refreence to the extracted table of contents
-sub extract_contents_table 
+# Extract a table of contents listing infomation from the given markdown contents
+# Each listing of the contents will be a hash of id, title and level
+# Returns a reference to the extracted listing
+sub extract_contents_listing 
 {
     my ($contents) = @_;
     
-    # Extract table of contents by extracting first and second level headers
-    my @contents_table = ();
+    # Extract table of contents listing by extracting first and second level headers
+    my @listing = ();
     for my $line(@{$contents}) 
     {
-        # Check for first and second level headers
-        if($line =~ /^#{1,2}[^#]+$/)
+        # Extract first ands second and third level headers for table of contents
+        # only
+        if($line =~ /^\s*#{1,3}[^#]/)
         {
             my $header = $line;
-            # Clean headers of extranous characters
-            chomp $header;
-            $header =~ s/^#{1,2}\W*${TITLE_REGEX}\W*$/$1/;
         
-            # Add cleaned header to table of contents
-            push @contents_table, $header;
+            # Compute level of header by counting hashtags
+            my $hashtags = $header;
+            $hashtags =~ s/[^#]//g;
+            my $level = length $hashtags;
+
+            # Clean headers of extranous characters to form title
+            my $title = &filter_text($header);
+        
+            # Form identifier from title
+            my $id = lc $title;
+            $id =~ s/[^a-z]+/-/g;
+    
+            # Add listing to contents 
+            my %listing = (
+                "id" => $id,
+                "title" => $title,
+                "level" => $level
+            );
+            push @listing, \%listing;
         }
     }
     
-    return \@contents_table;
+    return \@listing;
 }
 
 # Extract metadata for the blog entry at the given path
@@ -73,20 +102,19 @@ sub extract_metadata
 
     # Extract entry title
     my $title = $contents[0];
-    chomp $title;
-    $title =~ s/\W*${TITLE_REGEX}\W*/$1/g;
+    $title = &filter_text($title);
     
     # Extract entry subtitle
     my $subtitle = $contents[1];
-    chomp $subtitle;
-    $subtitle =~ s/\W*${TITLE_REGEX}\W*/$1/g;
+    $subtitle = &filter_text($subtitle);
     
     # Extract entry table of contnts
-    my $contents_table = &extract_contents_table(\@contents);
+    my $listing = &extract_contents_listing(\@contents);
 
     # Extract entry identifier from path
     my $id = $path;
     $id =~ s/\W*(\w+).*/$1/g;
+    $id =~ s/[ _]/-/g;
     
     # Build reference to href for post. 
     # href references the preprocessed version
@@ -100,7 +128,7 @@ sub extract_metadata
         "title" => $title,
         "subtitle" => $subtitle,
         "href" => $href,
-        "contents_table" => $contents_table
+        "listing" => $listing
     };
 
     return $metadata;
