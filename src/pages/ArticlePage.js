@@ -4,7 +4,12 @@
 */
 
 import React from 'react';
-import Showdown from 'showdown';
+import Markdown from 'markdown-it';
+import MarkdownKatex from 'markdown-it-katex';
+import MarkdownHeaderID from 'markdown-it-named-headings';
+
+import ArticleContents from "../components/ArticleContents.js";
+
 import "../styles/ArticlePage.css";
 
 /* Article Page renders and displays a specific blog article for reading,
@@ -28,17 +33,22 @@ class ArticlePage extends React.Component {
         fetch(entry.href)
             .then((response) => response.text())
             .then((content) => {
-                // Convert markdown to HTML for later rendering
-                const convertor = new Showdown.Converter({tables: true});
-                const contentHTML = convertor.makeHtml(content);
+                // Configure markdown convertor
+                // Add support for latex expressions 
+                const convertor = Markdown();
+                convertor.use(MarkdownKatex);
+                // Add support for header ids
+                convertor.use(MarkdownHeaderID);
+            
+                // Convert markdown to html for rendering
+                const contentHTML = convertor.render(content);
 
                 //.Trigger rerender with content
                 this.setState({ "content": contentHTML });
             });
     }
 
-    /* Render the article page with the entry content or render loading screen 
-    */
+    /* Render the article page with the entry content or render loading screen */
     render() {
         // Check if article content already loaded
         if(this.state.content == null) 
@@ -54,19 +64,12 @@ class ArticlePage extends React.Component {
         } else {
             const entry = this.props.entry
 
-            // Generate components for table of contents listing
-            const contentsListing = entry.contents_table.map((listing) => (
-                <li className="listing" key={listing}> {listing} </li>)
-            );
-
             // Render article with content entry
             return (
                 <section id="article" className="page">
                     <div className="sidebar">
                         <h4 className="fancy">{entry.title}</h4>
-                        <ul className="contents-table">
-                            {contentsListing}
-                        </ul>
+                        <ArticleContents contents={entry.contents} />
                     </div>  
                     <div className="content-wrapper">
                         <div className="content" 
@@ -77,6 +80,7 @@ class ArticlePage extends React.Component {
             );
         }
     }
+                
 
     // Lifecycle events
     componentDidMount() {

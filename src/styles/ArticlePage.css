@@ -33,7 +33,8 @@
     padding: 1.8vmax;
 
     width: 20vw;
-    height: 100vh;
+    max-height: 100vh;
+    overflow: scroll;
 }
 
 #article.page .sidebar h4 {
@@ -43,25 +44,6 @@
 
     letter-spacing: -0.02em;
     
-}
-
-#article.page .sidebar .contents-table {
-    list-style-type: none;
-    padding: 0;
-}
-
-#article.page .sidebar .contents-table .listing {
-    margin-bottom: 1.6em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: right;
-
-    font-size: 1.2rem;
-    font-family: "Lato", sans-serif;
-    color: #B5B5B5;
-}
-
-#article.page .sidebar .contents-table .listing.reading {
 }
 
 @media only screen and (max-width: 800px) {
@@ -130,7 +112,9 @@
     margin-bottom: 2.4em;
 }
 
-/* Article Code */
 #article.page .content pre {
     overflow: scroll;
 }
+
+/* Latex Styling */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css');
