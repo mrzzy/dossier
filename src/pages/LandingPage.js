@@ -16,8 +16,13 @@ function LandingPage() {
         <section id="landing" className="page container">
             <div className="tagline">
                 <div className="container">
-                    <h2 className="fancy"> making and breaking.  </h2>
-                    <span className="footnote">est. 2014</span>
+                    <h1 className="fancy"> Zhan yan</h1>
+                    <span className="footnote">
+                        software developer 
+                        and ai enthusiast
+                        based in 
+                        singapore.
+                    </span>
                 </div>
             </div>
             <ResponsiveSwitch>

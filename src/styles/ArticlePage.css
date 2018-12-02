@@ -8,7 +8,7 @@
     min-height: 100vh;
     text-align: center;
 
-    background-color: #F4F4F4;
+    background-color: #FDFDFD;
 }
 
 /* Loading screen */
@@ -27,12 +27,13 @@
     position: fixed;
     left: 0;
     top: 0;
-    background-color: #F4F4F4;
+    background-color: #FDFDFD;
     text-align: left;
 
     padding: 1.8vmax;
 
     width: 20vw;
+    min-height: 100vh;
     max-height: 100vh;
     overflow: scroll;
 }
