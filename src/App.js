@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 import LandingPage from "./pages/LandingPage.js";
 import WorkPage from "./pages/WorkPage.js";
-import BlogPage from "./pages/BlogPage.js";
+import ArticlesPage from "./pages/ArticlesPage.js";
 import ArticlePage from "./pages/ArticlePage.js";
 
 import './styles/App.css';
@@ -21,7 +21,10 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Route exact path='/' component={HomePage} />
+                <Switch>
+                    <Route exact path='/' component={HomePage} />
+                    <Route path='/article' component={ArticlesPage} />
+                </Switch>
             </div>
         );
     }

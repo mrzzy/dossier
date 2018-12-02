@@ -1,27 +1,28 @@
 /*
- * components/BlogListing.js
- * Blog Listing Components
+ * components/ArticleListing.js
+ * Article Listing Components
 */
 
 import React from 'react';
 
-import "../styles/BlogListing.css";
-import BlogEntryBackground from "../assets/blog_entry@2x.png";
+import "../styles/ArticleListing.css";
+import ArticleEntryBackground from "../assets/article_entry@2x.png";
 
-/* Blog entry component represents a entry in a Blog List.
+/* Article entry component represents a entry in a article List.
  * Metadata about the entry is given by the meta prop a JS object which 
- * gives the title, subtitle, timestamp and href of the blog entry
+ * gives the title, subtitle, timestamp and href of the article entry
 */
-function BlogEntry(props) {
+function ArticleEntry(props) {
     const meta = props.meta;
+    console.log(meta);
     
     /* Format timestamp to date representation of timestamp */
     const timestampDate = new Date(meta.timestamp);
     const timestampStr = timestampDate.toLocaleDateString();
 
     return (
-        <a href={meta.href} className="blog-entry">
-            <img className="background" alt="background" src={BlogEntryBackground}a/>
+        <a href={meta.href} className="article-entry">
+            <img className="background" alt="background" src={ArticleEntryBackground}a/>
             <div className="content">
                 <h3 className="title">{meta.title}</h3>
                 <span className="timestamp fancy">{timestampStr}</span>
@@ -31,10 +32,10 @@ function BlogEntry(props) {
     );
 }
 
-/* Blog List component display a listing of blog posts based on the 
- * blog /content/blog/manifest.json
+/* Article List component display a listing of article posts based on the 
+ * article /content/article/manifest.json
 */
-class BlogList extends React.Component {
+class ArticleListing extends React.Component {
     constructor(props) {
         super(props);
 
@@ -46,9 +47,9 @@ class BlogList extends React.Component {
         this.loadContents = this.loadContents.bind(this);
     }
 
-    /* Load blog manifest with contents and trigger rerender with contents */
+    /* Load article manifest with contents and trigger rerender with contents */
     loadContents() {
-        fetch("/content/blog/manifest.json")
+        fetch("/content/article/manifest.json")
             .then((response) => response.json())
             .then((manifest) => {
                 // trigger render with manifest infomation
@@ -59,27 +60,29 @@ class BlogList extends React.Component {
     }
 
     /* Renders loading display if manifest has not yet loaded,
-     * otherwise, displays the blog listing from the data in the loaded manifest
+     * otherwise, displays the article listing from the data in the loaded manifest
     */
     render() {
         if(this.state.manifest === null) {
             // Contents not loaded, render loading display
             return (
-                <div className="blog-list">
+                <div className="article-list">
                     <div className="container">
                         <span className="loading fancy">Loading&hellip;</span>
                     </div>
                 </div>
             );
         } else {
-            // Contents has loaded, render blog posts from manifest
-            const blogEntries = this.state.manifest.map((metadata) => {
-                return <BlogEntry meta={metadata} />
+            // Contents has loaded, render article posts from manifest
+            const articleEntries = this.state.manifest.map((metadata) => {
+                return <ArticleEntry meta={metadata} />
             });
 
             return (
-                <div className="blog-list">
-                    {blogEntries}
+                <div className="article-list-wrapper">
+                    <div className="article-list">
+                        {articleEntries}
+                    </div>
                 </div>
             );
         }
@@ -93,4 +96,4 @@ class BlogList extends React.Component {
 }
 
 
-export default BlogList;
+export default ArticleListing;

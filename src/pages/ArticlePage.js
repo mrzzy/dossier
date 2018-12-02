@@ -14,7 +14,7 @@ import ArticleContents from "../components/ArticleContents.js";
 
 import "../styles/ArticlePage.css";
 
-/* Article Page renders and displays a specific blog article for reading,
+/* Article Page renders and displays a specific article for reading,
  * given the entry meta given by the meta tag */
 class ArticlePage extends React.Component {
     constructor(props) {

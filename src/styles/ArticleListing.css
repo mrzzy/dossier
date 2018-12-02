@@ -1,14 +1,14 @@
 /*
- * components/BlogListing.js
- * Blog Listing Components Styling
+ * components/ArticleListing.js
+ * Article Listing Components Styling
 */
 
 /* Loading Display */
-.blog-list .container {
+.article-list .container {
     position: relative;
 }
 
-.blog-list .loading {
+.article-list .loading {
     position:  absolute;
     top: 50%;
     left: 50%;
@@ -18,34 +18,48 @@
     font-size: 3.6rem;
 }
 
-/* Blog Listing */
-.blog-list {
-    display: flex;
+/* article Listing */
+.article-list-wrapper  {
+    text-align: center;
+}
+
+.article-list {
+    display: inline-flex;
+    max-width: 96vw;
+    
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    align-items: center;
 }
 
-/* Blog Entries */
-.blog-entry {
+/* article Entries */
+.article-entry {
+    margin-bottom: 1.6vw;
+    margin-top: 1.6vw;
     text-decoration: none;
+    text-align: left;
 
     position: relative;
     width: 28em;
-    height: 18em;
+    height: 20em;
+    opacity: 1.0;
 }
 
+.article-entry:active {
+    opacity: 0.72;
+}
 
-.blog-entry .background {
+.article-entry .background {
     position: absolute;
+    left: 0;
+    top: 0;
     height: 100%;
     width: 100%;
     
     z-index: 1;
 }
 
-.blog-entry .content  {
+.article-entry .content  {
     position: relative;
     height: 80%;
     width: 80%;
@@ -54,12 +68,12 @@
     overflow: hidden;
 }
 
-.blog-entry .content > * {
+.article-entry .content > * {
     position: relative;
     z-index: 2;
 }
 
-.blog-entry .title {
+.article-entry .title {
     margin: 0;
     padding-bottom: 0.4em;
     text-overflow: clip;
@@ -69,12 +83,12 @@
     text-overflow: ellipsis;
 }
 
-.blog-entry .timestamp {
+.article-entry .timestamp {
     display: block;
     color: #888888;
 }
 
-.blog-entry .subtitle {
+.article-entry .subtitle {
     display: block;
     color: #434343;
     overflow: hidden;
