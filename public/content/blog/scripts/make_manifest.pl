@@ -14,7 +14,7 @@ use POSIX qw(strftime);
 use JSON::PP;
 
 my $BLOG_PATH = '/content/blog';
-my $FILTER_REGEX = qr/[_#`*{}]/;
+my $TEXT_FILTER_REGEX = qr/[_#`*{}]/;
  
 ## Utility Functionality
 # Convert the given date to iso forma
@@ -37,23 +37,44 @@ sub filter_text
 {
     my ($feed) = @_;
     chomp $feed;
-    $feed =~ s/${FILTER_REGEX}//g;
+    $feed =~ s/${TEXT_FILTER_REGEX}//g;
     $feed =~ s/^\s*(.*)\s*$/$1/g;
 
     return $feed;
 }
 
+# Filters out code blocks from the given markdown contents
+# Returns the filtered contents array
+sub filter_code_blocks
+{
+    my ($feed) = @_;
+    $feed = join "", @{$feed};
+    
+    # Filter out code blocks delimited by 3 backticks
+    my $filtrate = "";
+    my @blocks = split /```/, $feed;
+    # Select alternate content blocks
+    for(my $i = 0; $i < @blocks; $i += 2) {
+        $filtrate .= $blocks[$i];
+    }
+
+    my @filtered_contents = split /\n/, $filtrate;
+    return \@filtered_contents;
+}   
+
 ## Metadata Extraction
-# Extract a table of contents listing infomation from the given markdown contents
+# Extract a table of contents listings infomation from the given markdown contents
 # Each listing of the contents will be a hash of id, title and level
 # Returns a reference to the extracted listing
 sub extract_contents_listing 
 {
-    my ($contents) = @_;
+    my ($content) = @_;
+    # Preprocess content
+    $content = &filter_code_blocks($content);
     
     # Extract table of contents listing by extracting first and second level headers
-    my @listing = ();
-    for my $line(@{$contents}) 
+    my @contents_listing = ();
+    for my $line(@{$content}) 
     {
         # Extract first ands second and third level headers for table of contents
         # only
@@ -79,11 +100,11 @@ sub extract_contents_listing
                 "title" => $title,
                 "level" => $level
             );
-            push @listing, \%listing;
+            push @contents_listing, \%listing;
         }
     }
     
-    return \@listing;
+    return \@contents_listing;
 }
 
 # Extract metadata for the blog entry at the given path
@@ -108,8 +129,8 @@ sub extract_metadata
     my $subtitle = $contents[1];
     $subtitle = &filter_text($subtitle);
     
-    # Extract entry table of contnts
-    my $listing = &extract_contents_listing(\@contents);
+    # Extract entry table of contents
+    my $contents_listing = &extract_contents_listing(\@contents);
 
     # Extract entry identifier from path
     my $id = $path;
@@ -128,7 +149,7 @@ sub extract_metadata
         "title" => $title,
         "subtitle" => $subtitle,
         "href" => $href,
-        "listing" => $listing
+        "contents" => $contents_listing
     };
 
     return $metadata;
