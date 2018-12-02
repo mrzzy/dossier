@@ -8,7 +8,7 @@ use warnings;
 use strict;
 use 5.010;
 
-my $BLOG_PATH = '/content/blog';
+my $ARTICLE_PATH = '/content/article';
 
 # Fix the attachment links in the markdown given markdown contents, so that the 
 # markdown has its attachments (images) properly
@@ -20,14 +20,14 @@ sub fix_attachment_links
     my @fixed_contents = ();
     for my $line(@{$contents}) {
         # Hardcoded regex targets boost notes markdown export format
-        $line =~ s/attachments\/[\w-]*\/(\w+.\w+)/$BLOG_PATH\/attachments\/$1/;
+        $line =~ s/attachments\/[\w-]*\/(\w+.\w+)/$ARTICLE_PATH\/attachments\/$1/;
         push @fixed_contents, $line;
     }
     
     return @fixed_contents;
 }
 
-# Define blog entries as all markdown files
+# Define article entries as all markdown files
 my @entry_paths = <*.md>;
 for my $path (@entry_paths) {
     # Read contents from entry

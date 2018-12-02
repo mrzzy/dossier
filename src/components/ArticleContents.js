@@ -81,7 +81,7 @@ class ArticleContents extends React.Component {
     constructor(props) {
         super(props);
         // Setup object state
-        if(this.props.contents.length > 0) {
+        if(props.contents.length > 0) {
             // When page loads, user is reading the first listing
             const readingListing = props.contents[0];
             this.state = {

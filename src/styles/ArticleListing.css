@@ -34,14 +34,12 @@
 
 /* article Entries */
 .article-entry {
-    margin-bottom: 1.6vw;
-    margin-top: 1.6vw;
     text-decoration: none;
     text-align: left;
 
     position: relative;
-    width: 28em;
-    height: 20em;
+    width: 22em;
+    height: 16em;
     opacity: 1.0;
 }
 
@@ -76,10 +74,13 @@
 .article-entry .title {
     margin: 0;
     padding-bottom: 0.4em;
-    text-overflow: clip;
-    color: #000000;
-    line-height: 1.2em;
 
+    color: #000000;
+    font-size: 2.2em;
+    font-family: "Lato", sans-serif;
+    line-height: 1.2em;
+    max-width: 86%;
+    overflow: hidden;
     text-overflow: ellipsis;
 }
 
@@ -90,7 +91,7 @@
 
 .article-entry .subtitle {
     display: block;
-    color: #434343;
+    color: #727272;
     overflow: hidden;
     text-overflow: ellipsis;
 }

@@ -15,30 +15,52 @@ import ArticleContents from "../components/ArticleContents.js";
 import "../styles/ArticlePage.css";
 
 /* Article Page renders and displays a specific article for reading,
- * given the entry meta given by the meta tag */
+ * given the entry given by the entryID prop */
 class ArticlePage extends React.Component {
     constructor(props) {
         super(props);
         
         // Setup object state
         this.state = {
+            entry: null,
             content: null
         };
         // Bind callbacks
+        this.loadMetadata = this.loadMetadata.bind(this);
         this.loadContent = this.loadContent.bind(this);
     }
+
+    /* Loads entry metadata for the  entryID url param using AJAX
+     * syncronously and returns the metadata
+    */
+    async loadMetadata()  {
+        // Fetch article manifest
+        const response = await fetch("/content/article/manifest.json");
+        const manifest = await response.json();
+        // Find metadata for entry specified by entryID
+        const entryID = this.props.match.params.entryID;
+        const entry = manifest.find((entry) => entry.id === entryID);
+
+        return entry;
+    }
+
 
 
     /* Load article content using AJAX and trigger render with content */
     loadContent() {
-        const entry = this.props.entry;
-        // Fetch content using AJAX
-        fetch(entry.href)
-            .then((response) => response.text())
-            .then((content) => {
-                //.Trigger rerender with content
-                this.setState({ "content": content });
-            });
+        this.loadMetadata().then((entry) => {
+            // Fetch content using AJAX
+            fetch(entry.href)
+                .then((response) => response.text())
+                .then((content) => {
+                    console.log(content);
+                    //.Trigger rerender with content
+                    this.setState({ 
+                        "entry": entry,
+                        "content": content
+                    });
+                });
+        });
     }
 
     /* Render the given markdown content for display as the article content
@@ -81,7 +103,7 @@ class ArticlePage extends React.Component {
                 </section>
             );
         } else {
-            const entry = this.props.entry
+            const entry = this.state.entry
 
             // Render article with content
             const contentHTML = this.renderContent(this.state.content);

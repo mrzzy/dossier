@@ -4,6 +4,7 @@
 */
 
 import React from 'react';
+import {Link} from "react-router-dom";
 
 import "../styles/ArticleListing.css";
 import ArticleEntryBackground from "../assets/article_entry@2x.png";
@@ -14,21 +15,20 @@ import ArticleEntryBackground from "../assets/article_entry@2x.png";
 */
 function ArticleEntry(props) {
     const meta = props.meta;
-    console.log(meta);
     
     /* Format timestamp to date representation of timestamp */
     const timestampDate = new Date(meta.timestamp);
     const timestampStr = timestampDate.toLocaleDateString();
 
     return (
-        <a href={meta.href} className="article-entry">
-            <img className="background" alt="background" src={ArticleEntryBackground}a/>
+        <Link to={"/article/" + meta.id} className="article-entry">
+            <img className="background" alt="background" src={ArticleEntryBackground}/>
             <div className="content">
                 <h3 className="title">{meta.title}</h3>
                 <span className="timestamp fancy">{timestampStr}</span>
                 <span className="subtitle">{meta.subtitle}</span>
             </div>
-        </a>
+        </Link>
     );
 }
 

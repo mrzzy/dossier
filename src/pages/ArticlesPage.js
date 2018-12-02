@@ -11,7 +11,7 @@ import "../styles/ArticlesPage.css";
 /* Articles Page renders the listing of articles available for viewing */
 function ArticlesPage(props) {
     return (
-        <section className="page" id="blog">
+        <section className="page" id="articles">
             <h1 className="fancy">writing.</h1>
             <ArticleListing/>
         </section>

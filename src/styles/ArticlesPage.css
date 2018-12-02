@@ -1,16 +1,17 @@
 /*
- * pages/BlogPage.js
- * Blog Page Styling
+ * pages/ArticlesPage.css
+ * Articles Page Styling
 */
 
-#blog.page {
+#articles.page {
     background-color: #D1DBCD;
     min-height: 100vh;
     padding-top: 0.6em;
 }
 
-#blog.page h1 {
+#articles.page h1 {
     color: #7B1010;
-    margin-top: 0.2em;
+    margin-top: 0em;
+    margin-bottom: 0.4em;
     margin-left: 8vw;
 }

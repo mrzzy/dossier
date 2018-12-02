@@ -1,7 +1,7 @@
 #
 # gen_manifest.pl
 # Dossier
-# Generate Blog manifest
+# Generate Article manifest
 # Manifest is used by the site to discover and obtain metadata about available
 # entrys
 #
@@ -13,7 +13,7 @@ use POSIX qw(strftime);
 
 use JSON::PP;
 
-my $BLOG_PATH = '/content/blog';
+my $ARTICLE_PATH = '/content/article';
 my $TEXT_FILTER_REGEX = qr/[_#`*{}]/;
  
 ## Utility Functionality
@@ -122,7 +122,7 @@ sub extract_contents_listing
     return \@contents_listing;
 }
 
-# Extract metadata for the blog entry at the given path
+# Extract metadata for the article entry at the given path
 # Returns the extracted metadata as a referene to hash
 sub extract_metadata 
 {
@@ -155,7 +155,7 @@ sub extract_metadata
     # Build reference to href for post. 
     # href references the preprocessed version
     my $href = $path;
-    $href =~ s/(\w+)\.md$/${BLOG_PATH}\/entry\/$1\.md/;
+    $href =~ s/(\w+)\.md$/${ARTICLE_PATH}\/entry\/$1\.md/;
     
     # Build metadata, to manifest
     my $metadata = {
