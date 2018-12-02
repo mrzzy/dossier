@@ -30,6 +30,18 @@ sub convert_iso_date
     return strftime("%Y-%m-%dT%H:%M:%S", localtime($local_date)) . $tz;
 }
 
+# Extracts the surrounding whitespace from the input string
+# Returns the input without surrounding whitespace
+sub chomp_surround
+{
+    my ($input) = @_;
+    # Remove leading and trailing whitespace
+    $input =~ s/^\s*//;
+    $input =~ s/\s*$//;
+
+    return $input;
+}
+
 # Extracts plain text by filter markdown special characters and removing
 # leading and trailing whitespace
 # Returns the extracted plaintext
@@ -37,8 +49,9 @@ sub filter_text
 {
     my ($feed) = @_;
     chomp $feed;
+    # Extract plaintext
     $feed =~ s/${TEXT_FILTER_REGEX}//g;
-    $feed =~ s/^\s*(.*)\s*$/$1/g;
+    $feed = &chomp_surround($feed);
 
     return $feed;
 }
@@ -92,7 +105,9 @@ sub extract_contents_listing
         
             # Form identifier from title
             my $id = lc $title;
-            $id =~ s/[^a-z]+/-/g;
+            $id =~ s/[^a-z0-9]/ /g;
+            $id = &chomp_surround($id);
+            $id =~ s/[ ]+/-/g;
     
             # Add listing to contents 
             my %listing = (
