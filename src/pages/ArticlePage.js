@@ -8,7 +8,7 @@ import Markdown from 'markdown-it';
 import MarkdownKatex from 'markdown-it-katex';
 import MarkdownHeaderID from 'markdown-it-named-headings';
 import HighlightJS from 'highlight.js';
-import 'highlight.js/styles/gruvbox-dark.css';
+import 'highlight.js/styles/solarized-light.css';
 
 import ArticleContents from "../components/ArticleContents.js";
 

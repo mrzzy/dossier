@@ -113,13 +113,16 @@
     overflow: scroll;
 }
 
+#article.page .content code {
+    font-size: 0.86em;
+}
+
 #article.page .content pre code {
     padding: 0.8em;
     font-size: 0.8em;
-    border-radius: 4pt;
-    box-shadow: inset 0px 0px 15px 6px rgba(0,0,0,1);
+    border-radius: 6pt;
+    box-shadow: inset 0px 0px 52px -33px #F2D2A6;
 }
-
 
 
 /* Article Blockquotes */
@@ -135,6 +138,36 @@
 
 #article.page .content a {
     color: #31837C;
+}
+
+/* Article Tables */
+#article.page .content table {
+    font-family: "Lato", sans-serif;
+    justify-content: center;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+#article.page .content table thead th {
+    padding-top: 0.8em;
+    padding-bottom: 0.6em;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+
+    background-color: #92d2c9;
+    color: #FFFFFF;
+    font-size: 1.12em;
+}
+
+#article.page .content table tbody td {
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+}
+
+#article.page .content table tbody tr:nth-child(even) {
+    background-color: #F1F8F7;
 }
 
 
