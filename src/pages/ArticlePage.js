@@ -7,6 +7,8 @@ import React from 'react';
 import Markdown from 'markdown-it';
 import MarkdownKatex from 'markdown-it-katex';
 import MarkdownHeaderID from 'markdown-it-named-headings';
+import HighlightJS from 'highlight.js';
+import 'highlight.js/styles/gruvbox-dark.css';
 
 import ArticleContents from "../components/ArticleContents.js";
 
@@ -26,6 +28,7 @@ class ArticlePage extends React.Component {
         this.loadContent = this.loadContent.bind(this);
     }
 
+
     /* Load article content using AJAX and trigger render with content */
     loadContent() {
         const entry = this.props.entry;
@@ -33,19 +36,35 @@ class ArticlePage extends React.Component {
         fetch(entry.href)
             .then((response) => response.text())
             .then((content) => {
-                // Configure markdown convertor
-                // Add support for latex expressions 
-                const convertor = Markdown();
-                convertor.use(MarkdownKatex);
-                // Add support for header ids
-                convertor.use(MarkdownHeaderID);
-            
-                // Convert markdown to html for rendering
-                const contentHTML = convertor.render(content);
-
                 //.Trigger rerender with content
-                this.setState({ "content": contentHTML });
+                this.setState({ "content": content });
             });
+    }
+
+    /* Render the given markdown content for display as the article content
+     * Converts the markdown to HTML, with table and latex rendering
+     * Applies syntax highlight to code blocks
+    */
+    renderContent(content) {
+        // Configure markdown convertor
+        // Add support for latex expressions 
+        const convertor = Markdown();
+        convertor.use(MarkdownKatex);
+        // Add support for header ids
+        convertor.use(MarkdownHeaderID);
+    
+        // Convert markdown to html
+        var contentHTML = convertor.render(content);
+        
+        // Highlight article code blocks with syntax highlighting 
+        const parser = new DOMParser();
+        const contentDocument = parser.parseFromString(contentHTML, "text/html");
+        console.log(contentDocument);
+        const codeNodes = contentDocument.querySelectorAll("pre code");
+        codeNodes.forEach((node) => HighlightJS.highlightBlock(node));
+        contentHTML = contentDocument.documentElement.outerHTML;
+
+        return contentHTML;
     }
 
     /* Render the article page with the entry content or render loading screen */
@@ -64,7 +83,8 @@ class ArticlePage extends React.Component {
         } else {
             const entry = this.props.entry
 
-            // Render article with content entry
+            // Render article with content
+            const contentHTML = this.renderContent(this.state.content);
             return (
                 <section id="article" className="page">
                     <div className="sidebar">
@@ -73,7 +93,7 @@ class ArticlePage extends React.Component {
                     </div>  
                     <div className="content-wrapper">
                         <div className="content" 
-                            dangerouslySetInnerHTML={{__html: this.state.content}}>
+                            dangerouslySetInnerHTML={{__html: contentHTML}}>
                         </div>
                     </div>
                 </section>

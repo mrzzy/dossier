@@ -38,12 +38,12 @@
 }
 
 #article.page .sidebar h4 {
-    color: #959595;
+    color: #818181;
     overflow: hidden;
     text-overflow: ellipsis;
 
+    font-size: 2em;
     letter-spacing: -0.02em;
-    
 }
 
 /* Article Content */
@@ -60,12 +60,15 @@
     position: relative;
     display: inline-block;
     width: 42vw;
+    padding-bottom: 2.4em;
 
     color: #000000;
     text-align: left;
     overflow: hidden;
     font-size: 1.5rem;
 }
+
+/* Article Content Headers */
 #article.page .content h1 {
     font-size: 2.8em;
     margin-top: 1.4em;
@@ -105,9 +108,35 @@
     margin-bottom: 2.4em;
 }
 
+/* Article Code blocks */
 #article.page .content pre {
     overflow: scroll;
 }
+
+#article.page .content pre code {
+    padding: 0.8em;
+    font-size: 0.8em;
+    border-radius: 4pt;
+    box-shadow: inset 0px 0px 15px 6px rgba(0,0,0,1);
+}
+
+
+
+/* Article Blockquotes */
+#article.page .content blockquote {
+    margin-left: 0;
+    padding: 0.2em;
+    padding-left: 1.4em;
+
+    border-left-style: solid;
+    border-left-width: 0.36em;
+    border-left-color: #68C7C0;
+}
+
+#article.page .content a {
+    color: #31837C;
+}
+
 
 /* Latex Styling */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css');

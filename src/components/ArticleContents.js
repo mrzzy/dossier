@@ -126,6 +126,7 @@ class ArticleContents extends React.Component {
             // Check if user reading current listing by checking in viewport 
             // position
             const element = document.getElementById(listing.id);
+            if(element === null) console.log(listing.id);
             if(this.checkViewport(element)) {
                 readingID = listing.id;
             }
