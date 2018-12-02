@@ -46,12 +46,6 @@
     
 }
 
-@media only screen and (max-width: 800px) {
-    #article.page .sidebar {
-        display:none;
-    }
-}
-
 /* Article Content */
 #article.page .content-wrapper {
     display: inline-block;
@@ -72,7 +66,6 @@
     overflow: hidden;
     font-size: 1.5rem;
 }
-
 #article.page .content h1 {
     font-size: 2.8em;
     margin-top: 1.4em;
@@ -118,3 +111,33 @@
 
 /* Latex Styling */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css');
+
+/* Responsive styling */
+@media only screen and (max-width: 1200px) {
+    #article.page .sidebar {
+        width: 28vw;
+    }
+
+    #article.page .content-wrapper {
+        float: right;
+        width: 72vw;
+    }
+    
+    #article.page .content {
+        width: 56vw;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #article.page .sidebar {
+        display:none;
+    }
+
+    #article.page .content-wrapper {
+        width: 100vw;
+    }
+
+    #article.page .content {
+        width: 80vw;
+    }
+}
