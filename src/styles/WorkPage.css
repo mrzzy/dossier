@@ -13,6 +13,8 @@
 }
 
 #work.page .showcase .caption .description {
-    color: #E3A899;
     line-height: 1.8em;
+    font-family: "Lato";
+    font-size: 1.2em;
+    color: #8B7575;
 }

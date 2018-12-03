@@ -19,10 +19,14 @@
     display: inline-block;
     text-align: left;
     flex-grow: 1;
-    max-width: 28em;
+    max-width: 20em;
     padding-left: 6em;
     padding-right: 6em;
     padding-bottom: 2em;
+}
+
+.showcase.left .caption {
+    text-align: right;
 }
 
 .showcase img {
@@ -40,5 +44,9 @@
 
     .showcase .caption {
         max-width: 80vw;
+    }
+
+    .showcase.left .caption {
+        text-align: left;
     }
 }

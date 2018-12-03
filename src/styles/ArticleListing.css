@@ -1,0 +1,94 @@
+/*
+ * components/ArticleListing.js
+ * Article Listing Components Styling
+*/
+
+/* Loading Display */
+.article-list .loading {
+    position:  absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    color: #8D9589;
+    font-size: 3.6rem;
+}
+
+/* article Listing */
+.article-list-wrapper  {
+    text-align: center;
+}
+
+.article-list {
+    display: inline-flex;
+    max-width: 96vw;
+    
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+/* article Entries */
+.article-entry {
+    text-decoration: none;
+    text-align: left;
+
+    position: relative;
+    width: 22em;
+    height: 16em;
+    opacity: 1.0;
+}
+
+.article-entry:active {
+    opacity: 0.72;
+}
+
+.article-entry .background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    
+    z-index: 1;
+}
+
+.article-entry .content  {
+    position: relative;
+    height: 80%;
+    width: 80%;
+    left: 2em;
+    top: 1.6em;
+    overflow: hidden;
+}
+
+.article-entry .content > * {
+    position: relative;
+    z-index: 2;
+}
+
+.article-entry .title {
+    margin: 0;
+    padding-bottom: 0.4em;
+
+    color: #000000;
+    font-size: 2.2em;
+    font-family: "Lato", sans-serif;
+    line-height: 1.2em;
+    max-width: 86%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.article-entry .timestamp {
+    display: block;
+    color: #888888;
+}
+
+.article-entry .subtitle {
+    display: block;
+    color: #727272;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

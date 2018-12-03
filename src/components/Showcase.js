@@ -16,14 +16,14 @@ function Showcase(props) {
     // Position contents based on orientation prop
     if(props.orientation === "right"){
         return (
-            <div Class="showcase">
-                <div Class="container">
+            <div className={"showcase " + props.orientation}>
+                <div className="container">
                     {props.children}
                 </div>
-                <div Class="container">
-                    <div Class="caption">
-                        <h1 Class="fancy">{props.title}</h1>
-                        <span Class="description">{props.description}</span>
+                <div className="container">
+                    <div className="caption">
+                        <h1 className="fancy">{props.title}</h1>
+                        <span className="description">{props.description}</span>
                     </div>
                 </div>
             </div>
@@ -31,14 +31,14 @@ function Showcase(props) {
     }
     else {
         return (
-            <div Class="showcase">
-                <div Class="container">
-                    <div Class="caption">
-                        <h1 Class="fancy">{props.title}</h1>
-                        <span Class="description">{props.description}</span>
+            <div className={"showcase " + props.orientation}>
+                <div className="container">
+                    <div className="caption">
+                        <h1 className="fancy">{props.title}</h1>
+                        <span className="description">{props.description}</span>
                     </div>
                 </div>
-                <div Class="container">
+                <div className="container">
                     {props.children}
                 </div>
             </div>
