@@ -1,0 +1,47 @@
+/*
+ * components/Navbar.css
+ * Navbar Component styling
+*/
+
+.nav-bar {
+    margin-top: 3.6vh;
+    margin-right: 2vw;
+    position: fixed;
+    right: 2vw;
+    opacity: 0.72;
+    z-index: 5;
+}
+
+.nav-bar img {
+    float: left;
+}
+
+.nav-item {
+    display: inline-block;
+    margin-left: 1.2vw;
+}
+
+.nav-item.selected {
+    font-weight: 700;
+}
+
+.nav-item > *{
+    text-decoration: none;
+}
+
+.nav-bar.theme-work .nav-item > * {
+    color: #795B5B;
+}
+.nav-bar.theme-articles .nav-item > * {
+    color: #A7A7A7;
+}
+
+@media screen and (max-width: 800px) {
+    .nav-item {
+        display: none;
+    }
+}
+
+.nav-item.show {
+    display: block;
+}
