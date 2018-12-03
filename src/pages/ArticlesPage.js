@@ -5,6 +5,7 @@
 
 import React from "react"
 import ArticleListing from "../components/ArticleListing.js";
+import Navbar from "../components/Navbar.js";
 
 import "../styles/ArticlesPage.css";
 
@@ -12,7 +13,8 @@ import "../styles/ArticlesPage.css";
 function ArticlesPage(props) {
     return (
         <section className="page" id="articles">
-            <h1 className="fancy">writing.</h1>
+            <Navbar selected="articles"/>
+            <h1 className="fancy">articles.</h1>
             <ArticleListing/>
         </section>
     );

@@ -17,7 +17,7 @@ import MobileTrumpImage from "../assets/mobile_work_trump@2x.jpg";
 /* WorkPage renders the works page */
 function WorkPage(props) {
     return (
-        <section Class="page" id="work">
+        <section className="page" id="work">
             <Showcase orientation="right" title="trump" description="
                 I designed and developed  Tinkertanker’s booking system,
                 TRUMP to make managing bookings a piece of cake ">

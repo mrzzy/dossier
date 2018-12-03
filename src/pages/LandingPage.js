@@ -19,7 +19,7 @@ function LandingPage() {
                     <h1 className="fancy"> Zhan yan</h1>
                     <span className="footnote">
                         software developer 
-                        and ai enthusiast
+                        and AI enthusiast
                         based in 
                         singapore.
                     </span>

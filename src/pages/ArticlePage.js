@@ -10,6 +10,7 @@ import MarkdownHeaderID from 'markdown-it-named-headings';
 import HighlightJS from 'highlight.js';
 import 'highlight.js/styles/solarized-light.css';
 
+import Navbar from "../components/Navbar.js";
 import ArticleContents from "../components/ArticleContents.js";
 
 import "../styles/ArticlePage.css";
@@ -97,6 +98,8 @@ class ArticlePage extends React.Component {
             // Render Loading page
             return (
                 <section id="article" className="page">
+                    <Navbar selected="articles"/>
+
                     <div className="container">
                         <h3 className="loading fancy">Loading&hellip;</h3>
                     </div>
@@ -109,6 +112,8 @@ class ArticlePage extends React.Component {
             const contentHTML = this.renderContent(this.state.content);
             return (
                 <section id="article" className="page">
+                    <Navbar selected="articles"/>
+
                     <div className="sidebar">
                         <h4 className="fancy">{entry.title}</h4>
                         <ArticleContents contents={entry.contents} />

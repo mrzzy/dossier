@@ -4,10 +4,6 @@
 */
 
 /* Loading Display */
-.article-list .container {
-    position: relative;
-}
-
 .article-list .loading {
     position:  absolute;
     top: 50%;
