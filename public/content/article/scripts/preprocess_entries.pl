@@ -1,7 +1,7 @@
 #
 # preprocess_entries.pl
 # Dossier
-# Preprocess Blog Entries to ensure that they render properly on the site
+# Preprocess Article Entries to ensure that they render properly on the site
 #
 
 use warnings;
