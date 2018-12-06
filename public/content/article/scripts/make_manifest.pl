@@ -105,6 +105,7 @@ sub extract_contents_listing
         
             # Form identifier from title
             my $id = lc $title;
+            $id =~ s/&/amp/g; # Fix since id for headers convert "&" to "amp"
             $id =~ s/[^a-z0-9]/ /g;
             $id = &chomp_surround($id);
             $id =~ s/[ ]+/-/g;
