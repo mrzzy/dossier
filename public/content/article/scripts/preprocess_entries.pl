@@ -20,7 +20,8 @@ sub fix_attachment_links
     my @fixed_contents = ();
     for my $line(@{$contents}) {
         # Hardcoded regex targets boost notes markdown export format
-        $line =~ s/attachments\/[\w-]*\/(\w+.\w+)/$ARTICLE_PATH\/attachments\/$1/;
+        $line =~ s/attachments\/[-\w]*\/(\w+.\w+)/attachments\/$1/;
+        $line =~ s/(attachments\/\w+.\w+)/$ARTICLE_PATH\/$1/g;
         push @fixed_contents, $line;
     }
     
